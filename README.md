@@ -4,7 +4,7 @@ This repository contains projects and visualizations created from the Data Scien
 
 
 ## SQL
-
+* [Home Work #3 ](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/CLASS_WORK_MODULE3-1.sql)
 
 ## Statistics
 
