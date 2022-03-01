@@ -58,8 +58,43 @@ a.city_id = ci.city_id
 JOIN country CO
 on
 ci.country_id = co.country_id
-WHERE CO.country = 'UNITED STATES'
+WHERE CO.country = 'UNITED STATES';
 -- 36
+
+SELECT co.country, count(*) 'NUMBER OF ADDRESS in the Country'
+FROM address a
+INNER JOIN
+city c
+ON a.city_id = c.city_id
+JOIN country co
+ON c.country_id = co.country_id
+-- 603 before counts
+GROUP BY co.country;
+
+SELECT co.country, count(*) 'NUMBER OF ADDRESS in the Country'
+FROM address a
+INNER JOIN
+city c
+ON a.city_id = c.city_id
+JOIN country co
+ON c.country_id = co.country_id
+-- 603 before counts
+WHERE co.country = 'UNITED STATES'
+GROUP BY co.country;
+
+SELECT co.country, count(*) 'NUMBER OF ADDRESS in the Country'
+FROM address a
+INNER JOIN
+city c
+ON a.city_id = c.city_id
+JOIN country co
+ON c.country_id = co.country_id
+left outer JOIN customer cu
+on a.address_id = cu.address_id
+left JOIN payment p
+ON cu.customer_id = p.customer_id
+-- 603 before counts
+GROUP BY co.country;
 
 
 
