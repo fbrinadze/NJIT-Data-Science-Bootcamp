@@ -4,9 +4,9 @@ This repository contains projects and visualizations created from the Data Scien
 
 
 ## SQL
-* [Home Work #3 ](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/CLASS_WORK_MODULE3-1.sql)
-* [Home Work #4 ](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/class_4_hw.sql)
-* [Lesson Companion #5](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/Module_5.sql)
+* [Home Work #3 ](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/CLASS_WORK_MODULE3-1.sql)
+* [Home Work #4 ](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/class_4_hw.sql)
+* [Lesson Companion #5](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/Module_5.sql)
 
 ## Statistics and Probability
 
