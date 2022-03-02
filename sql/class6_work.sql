@@ -100,12 +100,90 @@ SELECT firstname, middlename, lastname, ifnull(middlename, '*') as NEW_MIDDLE_NA
 FROM employees
 order by MiddleName;
 
+-- activity 2.6.1
+select * from country;
+
+/* insert bara into country table */
+-- TASK 1
+INSERT INTO country (
+code, 
+name, 
+continent, 
+region, 
+surfacearea, 
+indepyear, 
+population, 
+lifeexpectancy, 
+GNP, 
+GNPOLD, 
+LOCALNAME, 
+GOVERnmentform,
+headofstate, 
+capital
+)
+VALUES (
+'BAS',
+'Basura',
+'Oceania',
+'Polynesia',
+450,
+2005,
+65000,
+80.0,
+1300,
+1150,
+'Basura',
+'Federal Republic',
+'Auntie A.',
+NULL
+);
+
+-- TASK 2
+select * from country where code = 'BAS';
+UPDATE country
+SET lifeexpectancy = 79.9
+WHERE code = 'BAS';
+
+-- TASK 3
+SELECT * FROM country c
+ORDER by c.LifeExpectancy DESC
+LIMIT 5;
+
+/* Activity 2.6.2 */
+-- Task 1
+SELECT * from country;
+# list 1: Independent countries
+SELECT * from country c
+WHERE c.IndepYear IS NOT NULL;
+
+# list 2: Colonies
+SELECT * from country c
+WHERE c.IndepYear IS NULL;
+
+-- Task 2
+SELECT c.code, 
+       c.name,
+       cl.language as 'Language Spoken'
+FROM country c
+JOIN countrylanguage cl
+ON c.Code = cl.CountryCode
+WHERE c.name in ('American Samoa', 'Kiribati', 'Tonga');
 
 
+/* Activity 2.6.3 */
 
+-- Task 1
+SELECT * FROM country
+order by SurfaceArea ASC
+LIMIT 1; -- Holy See (vatican city)
 
+-- Task 2
+SELECT * FROM country
+where SurfaceArea < 1500 and GNP > (select avg(gnp) from country);
 
-
-
+-- Task 3
+SELECT * FROM country
+where population >= (SELECT max(population) from country)
+order by SurfaceArea ASC
 
 
