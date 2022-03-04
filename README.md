@@ -8,7 +8,7 @@ This repository contains projects and visualizations created from the Data Scien
 * [Home Work #4](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/class_4_hw.sql)
 * [Lesson Companion #5](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/Module_5.sql)
 * [Home Work #5](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/class6_work.sql)
-
+* [Lesson Companion #7](https://github.com/fbrinadze/NJIT-Data-Science-Bootcamp/blob/main/sql/class_Activity_7.sql)
 
 ## Statistics and Probability
 
