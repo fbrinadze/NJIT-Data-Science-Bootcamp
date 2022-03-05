@@ -60,4 +60,4 @@ begin
     from country;
 end $
 
-call get_country_list();
+call get_country_list();get_country_list
