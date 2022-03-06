@@ -27,13 +27,13 @@ WHERE i.instrument = 'Drums';
 
 -- Task 3: How many bands feature a certain instrument
 
-SELECT count(b.bandname) as "Number of Bands that feature a Lead Guitar"
+SELECT i.instrument, count(*)
 FROM band b
 INNER JOIN player p 
 ON b.idband = p.idband
 INNER JOIN instrument i
 ON i.instid = p.instid
-WHERE i.instrument = 'Lead Guitar';
+group by i.instrument
 
 ### Part 2 ###
 
