@@ -33,11 +33,12 @@ INNER JOIN player p
 ON b.idband = p.idband
 INNER JOIN instrument i
 ON i.instid = p.instid
-group by i.instrument
+group by i.instrument;
 
 ### Part 2 ###
 
 -- Task 1: Add new bands to the bands table and player table
+-- Weezer, TLC, Paramore, Blackpink, Vampire Weekend
 select * from band;
 /* 
 -- Bands
@@ -86,15 +87,15 @@ values
         (4, 24, 'Zac', 'Farro', 'Voorhees Township', 'NJ'),
         (1, 25, 'Jisoo', 'Kim',null, 'South Korea'),
         (1, 25, 'Jennie', 'Kim',null, 'South Korea'),
-        (1, 25, 'Roseanne', 'Park', null, 'South Korea'),
-		(1, 25, 'Lisa', 'Manoban', null, 'South Korea'),
-		(1, 26, 'Ezra', 'Koenig', 'New York', 'NJ'),
+        (1, 25, 'Roseanne', 'Park', null, 'New Zealand'),
+		(1, 25, 'Lisa', 'Manoban', null, 'Thailand'),
+		(1, 26, 'Ezra', 'Koenig', 'New York', 'NY'),
         (2, 26, 'Chris', 'Baio', 'Bronxville', 'NJ'),
         (4, 26, 'Chris', 'Tomson', 'Upper Freehold Township', 'NJ');
 
 select * from player;
 
--- Task 2: add the new venue to the venu table
+-- Task 2: add the new venue to the venue table
 
 /* 
 	Venue: Twin City Rock House
@@ -114,14 +115,10 @@ values ('Twin City Rock House', 'Minneapolis', 'MN', '55414', 2000);
 -- The fesival will take place on the first saturday of next month and will have 2,000 atteendees
 -- Each band will need the gig added to the gig table
 
-SELECT * from gig;
 /* gig columns
 
 idvenue, idband, gigdate, numattendees
-
-*/
-
-/* 
+ 
 
 idvenue = 12
 vname = 'Twin City Rock House'
@@ -130,21 +127,10 @@ state = 'MN'
 zipcode = '55414'
 seats = 2000
 
-*/
-
-/*
-select b.idband, b.bandname, p.pfname, p.plname
-from band b
-join player p
-on b.idband = p.idband
-*/
-
-/* idband 
 25= blackpink
 8 = bruce springsteen
 22 = weezer
 */
-
 
 select * from gig;
 
@@ -153,10 +139,10 @@ values (12, 7, '2022/04/22', 2000),
 	   (12, 8, '2022/04/22', 2000), 
        (12, 25,'2022/04/22', 2000);
 
--- Task 2: Create a view that displays the following information
+-- Task 2: Create a view that displays the following information order by gig date
 -- Band ID, Band Name, Gig Venue, Gig Date, Number of attendees
 
-CREATE view vw_upcoming_gigs as
+CREATE OR REPLACE VIEW vw_upcoming_gigs AS
 SELECT b.idband Band_ID, 
        b.bandname Band_Name,
        v.vname Venue_Name,
@@ -166,46 +152,45 @@ FROM band b
 INNER JOIN gig g
 ON b.idband = g.idband
 INNER JOIN venue v
-ON v.idvenue = g.idvenue;
+ON v.idvenue = g.idvenue
+order by g.gigdate DESC;
 
 SELECT * FROM vw_upcoming_gigs;
 
--- Task 3: Create a view that shows the locatiuon of venues and the hometiwns of our artists.  If the city column is NUll
--- for an artists, display 'International' Instead
+-- Task 3: We would like a view that shows us the location of our venues
+-- and the hometowns of our signed artis.  Not all our artists are from the united state.
+-- if the city city column is null for an artist, we can display their state and "International" instead
+-- Fields: Band ID, band name, player first name, player last name,
+-- home city, home state, gig, venue name, venue city, venue state
+
 
 /*
-select homecity, 
-	   homestate, 
-       case 
-		    when homecity is null then 'International'
-            else homestate
-		end as homestate
-From player;
+	NOTE: I made this a left join to show all users.  The question was abit ambigous when I read it agin
+
 */
 
-CREATE VIEW vw_artist_home_towns_and_venues as
+CREATE OR REPLACE VIEW vw_artist_home_towns_and_venues AS
 SELECT b.idband Band_ID,
        b.bandname Band_Name,
-       p.pfname Player_First_Name,
+	   p.pfname Player_First_Name, 
        p.plname Player_Last_Name,
-       p.homecity Home_City,
-       p.homestate Home_state,
-       CASE
+        CASE
 			WHEN p.homecity IS NULL THEN 'International'
-            ELSE p.homecity 
-		END Home_City2,
-        p.homestate Home_State ,
-        g.gigdate GIG_Date,
-        v.vname Venue_Name,
-        v.city Venue_City,
-        v.state Venue_State
+            ELSE p.homestate
+		END Home_city,
+       p.homestate Home_State,
+       g.gigdate Gig_Date,
+       v.vname Venue_Name,
+       v.city Venue_City,
+       v.state Venue_State
 FROM band b
 INNER JOIN player p
 ON b.idband = p.idband
-INNER JOIN gig g
+LEFT JOIN gig g
 ON p.idband = g.idband
-INNER JOIN venue v
-on g.idvenue = v.idvenue;
+LEFT JOIN venue v
+ON g.idvenue = v.idvenue
+ORDER BY gigdate desc, band_id;
 
 select * from vw_artist_home_towns_and_venues;
 
